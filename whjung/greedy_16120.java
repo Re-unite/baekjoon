@@ -1,32 +1,27 @@
 import java.util.*;
 
-public class greedy_5545 {
+public class greedy_16120 {
+    final static String PPAP = "PPAP";
+    final static char A = 'A';
+    final static char P = 'P';
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int typeCount = sc.nextInt();
-        int doughPrice= sc.nextInt();
-        int toppingPrice = sc.nextInt();
-        int doughCalorie = sc.nextInt();
-        List<Integer> toppingCalories = new ArrayList<>();
-
-        for(int i=0; i< typeCount; i++) {
-            toppingCalories.add(sc.nextInt());
+        String str = sc.nextLine();
+        Queue<Character> queue = new LinkedList<>();
+        for(int i=0; i<str.length()-1; i++) {
+            if(str.charAt(i) == P) {
+                queue.add(P);
+            } else {
+                if(queue.size() > 2 && i < str.length()-1 && str.charAt(i+1) == P) {
+                    queue.poll();
+                    queue.poll();
+                } else {
+                    System.out.println("NP");
+                    return;
+                }
+            }
         }
-
-        Collections.sort(toppingCalories, Collections.reverseOrder());
-        System.out.println(bestCalorie(doughPrice, toppingPrice, doughCalorie, toppingCalories));
-    }
-
-    public static int bestCalorie(int doughPrice, int toppingPrice, int doughCalorie, List<Integer> toppingCalories) {
-        int totalCalorie = doughCalorie;
-        int price = 0;
-        int bestPizzaCalorie = doughCalorie/doughPrice;
-        for(int i=0; i<toppingCalories.size(); i++) {
-            totalCalorie += toppingCalories.get(i);
-            price = doughPrice + ( toppingPrice* (i+1) );
-            if(bestPizzaCalorie > totalCalorie/price) break;
-            bestPizzaCalorie = totalCalorie/price;
-        }
-        return bestPizzaCalorie;
+        System.out.println(queue.size() == 1 ? PPAP : "NP");
     }
 }
