@@ -12,48 +12,28 @@ rl.on('line', function (line) {
 });
 
 const solution = (str) => {
-  const getNewStr = (param) => {
-    let newStr = '';
-    let cnt = 0;
+  if (str === 'PPAP' || str === 'P') {
+    console.log('PPAP');
+    return;
+  }
 
-    for (let i = 0; i < param.length; i++) {
-      const checkStr = param.substring(i, i + 4);
+  const stack = [];
+  let result = 'NP';
 
-      if (checkStr === 'PPAP') {
-        i = i + 3;
-        cnt++;
-        newStr = newStr + 'P';
+  for (let i = 0; i < str.length; i++) {
+    const target = str[i];
+    if (target == 'P') stack.push('P');
+    else {
+      if (stack.length >= 2 && i < str.length - 1 && str[i + 1] == 'P') {
+        stack.pop();
+        stack.pop();
       } else {
-        newStr = newStr + param[i];
+        console.log('NP');
+        return;
       }
     }
-
-    return {
-      newStr: newStr,
-      cnt: cnt,
-    };
-  };
-
-  let result = 'NP';
-  let newStr;
-  let obj = {};
-  let cnt = 1; // 무조건 한번은 돌아야 하기 때문에
-  let idx = 0;
-
-  while (cnt != 0) {
-    if (idx == 0) {
-      obj = getNewStr(str);
-    } else {
-      obj = getNewStr(newStr);
-    }
-    newStr = obj.newStr;
-    cnt = obj.cnt;
-    idx++;
   }
 
-  if (obj.newStr === 'P') {
-    result = 'PPAP';
-  }
-
+  result = stack.length === 1 ? 'PPAP' : 'NP';
   console.log(result);
 };
