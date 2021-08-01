@@ -46,11 +46,7 @@ function solution(haveCards, resultCards) {
 const getHaveCountData = (haveCards) => {
   const haveCardsData = {};
   for (const haveCard of haveCards) {
-    if (haveCardsData[haveCard]) {
-      haveCardsData[haveCard] += 1;
-    } else {
-      haveCardsData[haveCard] = 1;
-    }
+    haveCardsData[haveCard] = haveCardsData[haveCard] ? (haveCardsData[haveCard] += 1) : 1;
   }
 
   return haveCardsData;
