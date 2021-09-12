@@ -5,21 +5,23 @@ const rl = readline.createInterface({
   output: process.stdout,
 });
 
-let inputCntList = null;
+let list1Len = 0;
+let list2Len = 0;
 const list1 = [];
 const list2 = [];
 
 // INPUT 알맞게 조정
 rl.on('line', function (line) {
-  if (!inputCntList) {
-    inputCntList = line.split(' ').map((item) => Number(item));
+  if (list1Len + list2Len === 0) {
+    list1Len = Number(line.split(' ')[0]);
+    list2Len = Number(line.split(' ')[1]);
   } else {
-    if (list1.length < inputCntList[0]) {
+    if (list1.length < list1Len) {
       list1.push(line);
     } else {
       list2.push(line);
 
-      if (list2.length === inputCntList[1]) {
+      if (list2.length === list2Len) {
         solution(list1, list2);
         rl.close();
       }
