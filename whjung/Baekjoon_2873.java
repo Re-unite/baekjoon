@@ -1,30 +1,27 @@
-import java.util.*;
+import java.util.HashSet;
+import java.util.Scanner;
+import java.util.Set;
+import java.util.TreeSet;
 
-public class Baekjoon_1764 {
+public class Baekjoon_2873 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String[] size = sc.nextLine().split(" ");
-        int unheardSize = Integer.parseInt(size[0]);
-        int unpublishedSize = Integer.parseInt(size[1]);
-        Set<String> unheardSet = new HashSet<>();
-        TreeSet<String> results = new TreeSet<>();
-        for(int i=0; i<unheardSize; i++) {
-            String name = sc.nextLine();
-            unheardSet.add(name);
-        }
+        int R = Integer.parseInt(size[0]);
+        int C = Integer.parseInt(size[1]);
+        int[][] site = new int[C][R];
 
-        for(int i=0; i<unpublishedSize; i++)  {
-            String name = sc.nextLine();
-            if(unheardSet.contains(name)) {
-                results.add(name);
+        for(int i=0; i<C; i++) {
+            for(int j=0; j<R; j++) {
+                site[i][j] = sc.nextInt();
             }
         }
 
-        int resultSize = results.size();
-        System.out.println(resultSize);
 
-        for(int i=0; i< resultSize; i++) {
-            System.out.println(results.pollFirst());
-        }
+
+    }
+
+    public void getCheck() {
+
     }
 }
