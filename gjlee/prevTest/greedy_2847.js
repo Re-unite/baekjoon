@@ -27,13 +27,13 @@ rl.on('line', function (line) {
 const solution = () => {
   const len = scoreList.length;
   let result = 0;
-  let currScore; // 현재 스코어
-  let prevScore; // 이전 스코어
-  let diff; // 현재 스코어와 이전 스코어의 차 + 1
+  let currScore;
+  let prevScore;
+  let diff;
 
   for (let i = len - 1; i > 0; i--) {
-    currScore = scoreList[i];
-    prevScore = scoreList[i - 1];
+    currScore = scoreList[i]; // 현재 스코어
+    prevScore = scoreList[i - 1]; // 이전 스코어
 
     if (prevScore > currScore) {
       // 이전 스코어가 현재 스코어 보다 큰 경우
