@@ -15,6 +15,7 @@ rl.on('line', function (line) {
     levels.push(input);
     if (levels.length === count) {
       solution(levels.reverse());
+      rl.close();
     }
   }
 }).on('close', function () {
@@ -23,13 +24,14 @@ rl.on('line', function (line) {
 
 function solution(levels) {
   let result = 0;
-  let nextLevel = levels[0];
+  let prevLevel = levels[0];
   for (let i = 1; i < levels.length; i++) {
-    nextLevel = nextLevel - 1;
-
-    // 다음 레벨의 점수보다 클 경우 그 차이 결과에 저장
-    if (levels[i] - nextLevel > 0) {
-      result += levels[i] - nextLevel;
+    const diff = levels[i] - prevLevel;
+    if (diff >= 0) {
+      result += diff + 1;
+      prevLevel = levels[i] - diff - 1;
+    } else {
+      prevLevel = levels[i];
     }
   }
 
